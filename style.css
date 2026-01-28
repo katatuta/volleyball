@@ -1,1 +1,110 @@
-/* Add styles here */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+:root {
+    --court-width: 800px;
+    --court-height: 400px;
+    --net-height: 150px;
+    --ball-size: 20px;
+    --player-width: 50px;
+    --player-height: 80px;
+    --scoreboard-height: 100px;
+    --main-bg-color: #1a1a1a;
+    --court-bg-color: #2a2a2a;
+    --net-color: #ffffff;
+    --ball-color: #ffff00;
+    --player-one-color: #ffcc00; /* Yellow for KOR */
+    --player-two-color: #333333; /* Black for GER */
+    --text-color: #ffffff;
+    --accent-color: #ff00ff;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1582845873831-50794c489679?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzU0ODc4M0QyRDk2MTFFNDg0RkNDNTE3OUM0MDAwREIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzU0ODc4M0UyRDk2MTFFNDg0RkNDNTE3OUM0MDAwREIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3NTQ4NzgzQjJENTYxMUU0ODRGQ0M1MTc5QzQwMDBEQiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3NTQ4NzgzQzJENTYxMUU0ODRGQ0M1MTc5QzQwMDBEQiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2tldCBlbmQ9InIiPz6bMIE9AAAAYklEQVR42uzNMQEAAAgDILV/55cs4I10Ld4xJMAvVv0AiseJMAmBSRACYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRIEYRKESRAEYRIEGfAAN0kC9NT04xEAAAAASUVORK5CYII=');
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.game-container {
+    width: var(--court-width);
+    height: calc(var(--court-height) + var(--scoreboard-height));
+    background-color: transparent;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.court {
+    width: var(--court-width);
+    height: var(--court-height);
+    background-color: var(--court-bg-color);
+    position: relative;
+    border-top: 5px solid #fff;
+}
+
+.net {
+    position: absolute;
+    top: calc(var(--court-height) - var(--net-height) - 50px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: var(--net-height);
+    background-color: var(--net-color);
+}
+
+.ball {
+    position: absolute;
+    width: var(--ball-size);
+    height: var(--ball-size);
+    background-color: var(--ball-color);
+    border-radius: 50%;
+    left: 100px;
+    top: 100px;
+    box-shadow: 0 0 15px var(--ball-color), 0 0 25px var(--ball-color);
+}
+
+.player {
+    position: absolute;
+    width: var(--player-width);
+    height: var(--player-height);
+    bottom: 0;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+    transition: box-shadow 0.3s ease;
+}
+
+.player:hover {
+    box-shadow: 0 0 15px var(--accent-color), 0 0 25px var(--accent-color);
+}
+
+.player-one {
+    background-color: var(--player-one-color);
+    left: 150px;
+    box-shadow: 0 0 15px var(--player-one-color), 0 0 25px var(--player-one-color);
+}
+
+.player-two {
+    background-color: var(--player-two-color);
+    right: 150px;
+    box-shadow: 0 0 15px var(--player-two-color), 0 0 25px var(--player-two-color);
+}
